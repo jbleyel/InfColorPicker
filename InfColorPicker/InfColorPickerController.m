@@ -11,11 +11,9 @@
 //==============================================================================
 
 #import "InfColorPickerController.h"
-
 #import "InfColorBarPicker.h"
 #import "InfColorSquarePicker.h"
 #import "InfHSBSupport.h"
-#import "UIColor+Expanded.h"
 
 //------------------------------------------------------------------------------
 
@@ -56,6 +54,7 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 @property (nonatomic) IBOutlet InfColorBarView* alphabarView;
 
 @property (nonatomic) IBOutlet UILabel* txtValue;
+
 
 @end
 
@@ -151,11 +150,32 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
         _alphabarView.color = _sourceColor;
         _alpha = a;
     
-        _txtValue.text = [_sourceColor hexStringValue];
+        _txtValue.text = [self hexStringValue:_sourceColor];
 
     }
 	if (_resultColor)
 		_resultColorView.backgroundColor = _resultColor;
+}
+
+- (NSString *) hexStringValue:(UIColor*)color
+{
+    NSString *result=@"";
+    CGColorSpaceModel colorSpaceModel = CGColorSpaceGetModel(CGColorGetColorSpace(_sourceColor.CGColor));
+
+    if (kCGColorSpaceModelRGB == colorSpaceModel) {
+        CGFloat r,g,b,a;
+        if ( [color getRed:&r green:&g blue:&b alpha:&a]) {
+            result = [NSString stringWithFormat:@"#%02lX%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255),lroundf(a * 255)];
+        }
+    }
+    else if(kCGColorSpaceModelMonochrome == colorSpaceModel)
+    {
+        CGFloat w;
+        if ([color getWhite:&w alpha:NULL]) {
+            result = [NSString stringWithFormat:@"#%02lX%02lX%02lX",lroundf(w * 255) , lroundf(w * 255), lroundf(w * 255)];
+        }
+    }
+    return result;
 }
 
 - (UIInterfaceOrientationMask) supportedInterfaceOrientations
@@ -216,13 +236,19 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 
 - (IBAction) done: (id) sender
 {
-	[self.delegate colorPickerControllerDidFinish: self];
+    if (_resultBlock) {
+        _resultBlock(self, true, self.resultColor);
+    }
+//	[self.delegate colorPickerControllerDidFinish: self];
 }
 
 - (IBAction) cancel: (id) sender
 {
     self.resultColor = _sourceColor;
-	[self.delegate colorPickerControllerDidFinish: self];
+    if (_resultBlock) {
+        _resultBlock(self, false, self.resultColor);
+    }
+//	[self.delegate colorPickerControllerDidFinish: self];
 }
 
 //------------------------------------------------------------------------------
@@ -231,8 +257,8 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 
 - (void) informDelegateDidChangeColor
 {
-	if (self.delegate && [(id) self.delegate respondsToSelector: @selector(colorPickerControllerDidChangeColor:)])
-		[self.delegate colorPickerControllerDidChangeColor: self];
+	//if (self.delegate && [(id) self.delegate respondsToSelector: @selector(colorPickerControllerDidChangeColor:)])
+	//	[self.delegate colorPickerControllerDidChangeColor: self];
 }
 
 //------------------------------------------------------------------------------
@@ -254,7 +280,7 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	
 	_resultColorView.backgroundColor = _resultColor;
 	
-    _txtValue.text = [_resultColor hexStringValue];
+    _txtValue.text = [self hexStringValue:_resultColor];
     
     _alphabarView.color = _resultColor;
 

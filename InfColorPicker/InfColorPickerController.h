@@ -12,7 +12,11 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol InfColorPickerControllerDelegate;
+@class InfColorPickerController;
+
+typedef void (^InfColorPickerControllerCompletionBlock) (InfColorPickerController* _Nonnull ctrl ,BOOL Success, UIColor * _Nullable color);
+
+//@protocol InfColorPickerControllerDelegate;
 
 //------------------------------------------------------------------------------
 
@@ -20,20 +24,23 @@
 
 // Public API:
 
-+ (InfColorPickerController*) colorPickerViewController;
++ (InfColorPickerController*_Nonnull) colorPickerViewController;
 + (CGSize) idealSizeForViewInPopover;
 
-- (void) presentModallyOverViewController: (UIViewController*) controller;
+- (void) presentModallyOverViewController: (UIViewController*_Nullable) controller;
 
-@property (nonatomic) UIColor* sourceColor;
-@property (nonatomic) UIColor* resultColor;
+//@property (strong, nonatomic) id <InfColorPickerControllerDelegate> delegate;
 
-@property (strong, nonatomic) id <InfColorPickerControllerDelegate> delegate;
+@property (nonatomic) InfColorPickerControllerCompletionBlock _Nonnull resultBlock;
+
+@property (nonatomic) UIColor* _Nullable sourceColor;
+@property (nonatomic) UIColor* _Nullable resultColor;
+
 
 @end
 
 //------------------------------------------------------------------------------
-
+/*
 @protocol InfColorPickerControllerDelegate
 
 @optional
@@ -44,5 +51,5 @@
 - (void) colorPickerControllerDidChangeColor: (InfColorPickerController*) controller;
 
 @end
-
+*/
 //------------------------------------------------------------------------------
