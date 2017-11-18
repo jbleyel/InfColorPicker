@@ -90,7 +90,7 @@
 		indicator = [[InfColorIndicatorView alloc] initWithFrame: indicatorRect];
 		[self addSubview: indicator];
 	}
-	
+	[super layoutSubviews];
 	[self setIndicatorColor];
 	
 	CGFloat indicatorX = kContentInsetX + (self.value.x * (self.bounds.size.width - 2 * kContentInsetX));

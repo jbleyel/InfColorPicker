@@ -136,6 +136,8 @@ static CGImageRef createContentImage2()
 		[self addSubview: indicator];
 	}
 	
+    [super layoutSubviews];
+    
 	indicator.color = [UIColor colorWithHue: self.value
 	                             saturation: 1.0f
 	                             brightness: 1.0f

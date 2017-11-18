@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,24 +29,24 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z4n-Me-myn">
-                    <rect key="frame" x="20" y="18" width="70" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="55" customClass="InfColorSquarePicker">
-                    <rect key="frame" x="12" y="54" width="296" height="296"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55" customClass="InfColorSquarePicker">
+                    <rect key="frame" x="20" y="54" width="280" height="280"/>
                     <subviews>
-                        <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="50">
-                            <rect key="frame" x="19" y="19" width="258" height="258"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4n-Me-myn">
+                            <rect key="frame" x="105" y="267" width="70" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="7WK-Ka-kk5"/>
+                                <constraint firstAttribute="height" constant="20" id="FMt-pp-Zjr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50">
+                            <rect key="frame" x="20" y="20" width="240" height="239"/>
                             <subviews>
-                                <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="39" customClass="InfColorSquareView">
-                                    <rect key="frame" x="1" y="1" width="256" height="256"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39" customClass="InfColorSquareView">
+                                    <rect key="frame" x="1" y="1" width="238" height="237"/>
                                     <color key="backgroundColor" red="0.75" green="0.75" blue="0.75" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <accessibility key="accessibilityConfiguration" hint="" label="">
                                         <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -57,27 +58,39 @@
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" notEnabled="YES"/>
                             </accessibility>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="39" secondAttribute="bottom" constant="1" id="UMt-Kz-l6B"/>
+                                <constraint firstItem="39" firstAttribute="top" secondItem="50" secondAttribute="top" constant="1" id="bNe-rs-AnC"/>
+                                <constraint firstAttribute="trailing" secondItem="39" secondAttribute="trailing" constant="1" id="mKM-Sh-lPw"/>
+                                <constraint firstItem="39" firstAttribute="leading" secondItem="50" secondAttribute="leading" constant="1" id="mXl-25-F7p"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" hint="Sets the saturation and brightness of the color." label="Color square">
                         <bool key="isElement" value="YES"/>
                     </accessibility>
+                    <constraints>
+                        <constraint firstItem="50" firstAttribute="top" secondItem="55" secondAttribute="top" constant="20" id="Bbd-zZ-Qcm"/>
+                        <constraint firstAttribute="trailing" secondItem="50" secondAttribute="trailing" constant="20" id="Iqw-dt-Mz2"/>
+                        <constraint firstItem="Z4n-Me-myn" firstAttribute="centerX" secondItem="50" secondAttribute="centerX" id="UCc-0a-YgM"/>
+                        <constraint firstAttribute="width" secondItem="55" secondAttribute="height" multiplier="1:1" id="ZHV-j1-Z9X"/>
+                        <constraint firstAttribute="bottom" secondItem="50" secondAttribute="bottom" constant="21" id="pyp-o1-qRZ"/>
+                        <constraint firstItem="50" firstAttribute="leading" secondItem="55" secondAttribute="leading" constant="20" id="syB-8e-XUR"/>
+                        <constraint firstItem="Z4n-Me-myn" firstAttribute="top" secondItem="39" secondAttribute="bottom" constant="9" id="vOY-Ra-Y1L"/>
+                    </constraints>
                     <connections>
                         <action selector="takeSquareValue:" destination="-1" eventType="valueChanged" id="56"/>
                     </connections>
                 </view>
-                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="52" customClass="InfColorBarPicker">
-                    <rect key="frame" x="12" y="354" width="296" height="56"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52" customClass="InfColorBarPicker">
+                    <rect key="frame" x="10" y="344" width="300" height="60"/>
                     <subviews>
-                        <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="51">
-                            <rect key="frame" x="19" y="7" width="258" height="42"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51">
+                            <rect key="frame" x="20" y="10" width="260" height="40"/>
                             <subviews>
-                                <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="41" customClass="InfColorBarView">
-                                    <rect key="frame" x="1" y="1" width="256" height="40"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41" customClass="InfColorBarView">
+                                    <rect key="frame" x="1" y="1" width="258" height="38"/>
                                     <color key="backgroundColor" red="0.75" green="0.75" blue="0.75" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <accessibility key="accessibilityConfiguration" hint="" label="">
                                         <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -86,26 +99,38 @@
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="41" firstAttribute="top" secondItem="51" secondAttribute="top" constant="1" id="GjM-or-pTe"/>
+                                <constraint firstAttribute="height" constant="40" id="XGu-Aq-upK"/>
+                                <constraint firstAttribute="trailing" secondItem="41" secondAttribute="trailing" constant="1" id="tBb-L7-8j1"/>
+                                <constraint firstAttribute="bottom" secondItem="41" secondAttribute="bottom" constant="1" id="tke-rn-jmx"/>
+                                <constraint firstItem="41" firstAttribute="leading" secondItem="51" secondAttribute="leading" constant="1" id="wWc-es-tUZ"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" hint="Sets the hue of the color." label="Color bar">
                         <bool key="isElement" value="YES"/>
                     </accessibility>
+                    <constraints>
+                        <constraint firstItem="51" firstAttribute="top" secondItem="52" secondAttribute="top" constant="10" id="InK-RP-EQQ"/>
+                        <constraint firstItem="51" firstAttribute="leading" secondItem="52" secondAttribute="leading" constant="20" id="MNF-Rd-Wwd"/>
+                        <constraint firstAttribute="height" constant="60" id="VWU-Wp-BQ2"/>
+                        <constraint firstAttribute="trailing" secondItem="51" secondAttribute="trailing" constant="20" id="dcA-8O-iT8"/>
+                    </constraints>
                     <connections>
                         <action selector="takeBarValue:" destination="-1" eventType="valueChanged" id="53"/>
                     </connections>
                 </view>
-                <view contentMode="scaleToFill" id="79">
-                    <rect key="frame" x="31" y="18" width="258" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79">
+                    <rect key="frame" x="20" y="20" width="280" height="30"/>
                     <subviews>
-                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="65">
-                            <rect key="frame" x="100" y="0.0" width="62" height="30"/>
+                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="65">
+                            <rect key="frame" x="122" y="0.0" width="63" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="66" customClass="InfSourceColorView">
-                                    <rect key="frame" x="1" y="1" width="60" height="28"/>
+                                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="66" customClass="InfSourceColorView">
+                                    <rect key="frame" x="1" y="2" width="61" height="28"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <accessibility key="accessibilityConfiguration" label="Original color">
@@ -118,12 +143,12 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <view hidden="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="69">
-                            <rect key="frame" x="0.0" y="0.0" width="83" height="30"/>
+                        <view hidden="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="69">
+                            <rect key="frame" x="0.0" y="0.0" width="83" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="70" customClass="InfSourceColorView">
-                                    <rect key="frame" x="1" y="1" width="40" height="28"/>
+                                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70" customClass="InfSourceColorView">
+                                    <rect key="frame" x="1" y="2" width="40" height="28"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <accessibility key="accessibilityConfiguration" label="White">
@@ -133,8 +158,8 @@
                                         <action selector="takeBackgroundColor:" destination="-1" eventType="touchUpInside" id="75"/>
                                     </connections>
                                 </view>
-                                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="72" customClass="InfSourceColorView">
-                                    <rect key="frame" x="42" y="1" width="40" height="28"/>
+                                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="72" customClass="InfSourceColorView">
+                                    <rect key="frame" x="42" y="2" width="40" height="28"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <accessibility key="accessibilityConfiguration" label="Black">
@@ -147,12 +172,12 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="62">
-                            <rect key="frame" x="162" y="0.0" width="62" height="30"/>
+                        <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62">
+                            <rect key="frame" x="184" y="0.0" width="63" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="43">
-                                    <rect key="frame" x="1" y="1" width="60" height="28"/>
+                                <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43">
+                                    <rect key="frame" x="2" y="1" width="59" height="29"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <accessibility key="accessibilityConfiguration" label="New color">
@@ -163,15 +188,15 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Old" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HFq-tb-OpQ">
-                            <rect key="frame" x="75" y="4" width="42" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Old" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFq-tb-OpQ">
+                            <rect key="frame" x="94" y="4" width="42" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LPc-jp-jOG">
-                            <rect key="frame" x="227" y="4" width="42" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPc-jp-jOG">
+                            <rect key="frame" x="251" y="4" width="42" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -180,17 +205,14 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="vxs-Eg-RW5" customClass="InfColorBarPicker">
-                    <rect key="frame" x="12" y="413" width="296" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vxs-Eg-RW5" customClass="InfColorBarPicker">
+                    <rect key="frame" x="10" y="414" width="300" height="50"/>
                     <subviews>
-                        <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="7pa-0a-y8y">
-                            <rect key="frame" x="19" y="7" width="258" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pa-0a-y8y">
+                            <rect key="frame" x="20" y="10" width="260" height="30"/>
                             <subviews>
-                                <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="mHi-Sm-Owr" customClass="InfColorBarView">
-                                    <rect key="frame" x="1" y="1" width="256" height="28"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHi-Sm-Owr" customClass="InfColorBarView">
+                                    <rect key="frame" x="1" y="1" width="258" height="28"/>
                                     <color key="backgroundColor" red="0.75" green="0.75" blue="0.75" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <accessibility key="accessibilityConfiguration" hint="" label="">
                                         <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -199,25 +221,50 @@
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="mHi-Sm-Owr" firstAttribute="leading" secondItem="7pa-0a-y8y" secondAttribute="leading" constant="1" id="8Xf-Tv-ZJe"/>
+                                <constraint firstAttribute="height" constant="30" id="Cz4-Db-OmZ"/>
+                                <constraint firstAttribute="trailing" secondItem="mHi-Sm-Owr" secondAttribute="trailing" constant="1" id="Huo-93-mAi"/>
+                                <constraint firstAttribute="bottom" secondItem="mHi-Sm-Owr" secondAttribute="bottom" constant="1" id="Zra-Wr-icO"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="aiL-iI-7jw"/>
+                                <constraint firstItem="mHi-Sm-Owr" firstAttribute="top" secondItem="7pa-0a-y8y" secondAttribute="top" constant="1" id="uwz-0E-xRz"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" hint="Sets the hue of the color." label="Color bar">
                         <bool key="isElement" value="YES"/>
                     </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="7pa-0a-y8y" secondAttribute="trailing" constant="20" id="79d-du-zzG"/>
+                        <constraint firstItem="7pa-0a-y8y" firstAttribute="leading" secondItem="vxs-Eg-RW5" secondAttribute="leading" constant="20" id="R3Q-jj-JD3"/>
+                        <constraint firstAttribute="bottom" secondItem="7pa-0a-y8y" secondAttribute="bottom" constant="10" id="RGt-eY-REP"/>
+                        <constraint firstItem="7pa-0a-y8y" firstAttribute="top" secondItem="vxs-Eg-RW5" secondAttribute="top" constant="10" id="oya-B2-rWB"/>
+                        <constraint firstAttribute="height" constant="50" id="xeB-Bv-Ohc"/>
+                    </constraints>
                     <connections>
                         <action selector="takeAlphaValue:" destination="-1" eventType="valueChanged" id="cAM-dm-YxW"/>
                     </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.19897958636283875" green="0.19897958636283875" blue="0.19897958636283875" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <constraints>
+                <constraint firstItem="vxs-Eg-RW5" firstAttribute="top" secondItem="52" secondAttribute="bottom" constant="10" id="0rX-N9-vqf"/>
+                <constraint firstItem="55" firstAttribute="centerX" secondItem="vxs-Eg-RW5" secondAttribute="centerX" id="18N-gc-xuR"/>
+                <constraint firstItem="55" firstAttribute="trailing" secondItem="79" secondAttribute="trailing" id="4Em-VR-KN9"/>
+                <constraint firstItem="vxs-Eg-RW5" firstAttribute="leading" secondItem="52" secondAttribute="leading" id="4Vy-a7-P0e"/>
+                <constraint firstItem="55" firstAttribute="top" secondItem="34" secondAttribute="top" constant="54" id="52u-Uc-bUd"/>
+                <constraint firstItem="55" firstAttribute="top" secondItem="79" secondAttribute="bottom" constant="4" id="LmE-hT-iaR"/>
+                <constraint firstAttribute="trailing" secondItem="55" secondAttribute="trailing" constant="20" id="MXw-oQ-Pbe"/>
+                <constraint firstItem="55" firstAttribute="leading" secondItem="34" secondAttribute="leading" constant="20" id="Mak-uR-8th"/>
+                <constraint firstItem="55" firstAttribute="leading" secondItem="79" secondAttribute="leading" id="QUr-OE-PhJ"/>
+                <constraint firstItem="55" firstAttribute="leading" secondItem="34" secondAttribute="leading" constant="20" id="T2a-ha-K8k"/>
+                <constraint firstItem="52" firstAttribute="leading" secondItem="34" secondAttribute="leading" constant="10" id="eLK-vH-XZN"/>
+                <constraint firstItem="79" firstAttribute="top" secondItem="34" secondAttribute="top" constant="20" id="eLZ-mG-eop"/>
+                <constraint firstItem="55" firstAttribute="centerX" secondItem="52" secondAttribute="centerX" id="emC-2a-v1H"/>
+                <constraint firstItem="52" firstAttribute="top" secondItem="55" secondAttribute="bottom" constant="10" id="yUB-OZ-rI2"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

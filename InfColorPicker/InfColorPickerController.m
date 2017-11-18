@@ -103,7 +103,7 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 
 - (void) presentModallyOverViewController: (UIViewController*) controller
 {
-	UINavigationController* nav = [[InfColorPickerNavigationController alloc] initWithRootViewController: self];
+	UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController: self];
 	
 	nav.navigationBar.barStyle = UIBarStyleBlackOpaque;
 	
@@ -307,15 +307,6 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 		
 		self.resultColor = newValue;
 	}
-}
-
-//------------------------------------------------------------------------------
-#pragma mark	UIViewController(UIPopoverController) methods
-//------------------------------------------------------------------------------
-
-- (CGSize) contentSizeForViewInPopover
-{
-	return [[self class] idealSizeForViewInPopover];
 }
 
 //------------------------------------------------------------------------------
