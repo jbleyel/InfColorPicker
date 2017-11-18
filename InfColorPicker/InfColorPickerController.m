@@ -14,15 +14,8 @@
 
 #import "InfColorBarPicker.h"
 #import "InfColorSquarePicker.h"
-#import "InfColorPickerNavigationController.h"
 #import "InfHSBSupport.h"
 #import "UIColor+Expanded.h"
-
-//------------------------------------------------------------------------------
-
-#if !__has_feature(objc_arc)
-#error This file must be compiled with ARC enabled (-fobjc-arc).
-#endif
 
 //------------------------------------------------------------------------------
 
@@ -114,7 +107,7 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	
 	nav.navigationBar.barStyle = UIBarStyleBlackOpaque;
 	
-    if (IS_IPAD()) {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
     }
 
@@ -164,15 +157,6 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	if (_resultColor)
 		_resultColorView.backgroundColor = _resultColor;
 }
-
-//------------------------------------------------------------------------------
-/*
-- (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation
-{
-	return UIInterfaceOrientationIsPortrait(interfaceOrientation);
-}
-*/
-//------------------------------------------------------------------------------
 
 - (UIInterfaceOrientationMask) supportedInterfaceOrientations
 {
