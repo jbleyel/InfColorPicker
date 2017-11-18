@@ -15,15 +15,14 @@
 //------------------------------------------------------------------------------
 
 @interface InfColorBarView : UIView
-
+@property( nonatomic, strong) UIColor *color;
 @end
 
 //------------------------------------------------------------------------------
 
 @interface InfColorBarPicker : UIControl
-
 @property (nonatomic) float value;
-
+@property (nonatomic) BOOL fill;
 @end
 
 //------------------------------------------------------------------------------

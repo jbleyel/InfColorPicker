@@ -16,6 +16,7 @@
 #import "InfColorSquarePicker.h"
 #import "InfColorPickerNavigationController.h"
 #import "InfHSBSupport.h"
+#import "UIColor+Expanded.h"
 
 //------------------------------------------------------------------------------
 
@@ -58,6 +59,11 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 @property (nonatomic) IBOutlet UIView* resultColorView;
 @property (nonatomic) IBOutlet UINavigationController* navController;
 
+@property (nonatomic) IBOutlet InfColorBarPicker* alphabarPicker;
+@property (nonatomic) IBOutlet InfColorBarView* alphabarView;
+
+@property (nonatomic) IBOutlet UILabel* txtValue;
+
 @end
 
 //==============================================================================
@@ -66,6 +72,7 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	float _hue;
 	float _saturation;
 	float _brightness;
+	float _alpha;
 }
 
 //------------------------------------------------------------------------------
@@ -93,8 +100,7 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
 	
 	if (self) {
-		self.navigationItem.title = NSLocalizedString(@"Set Color",
-		                                              @"InfColorPicker default nav item title");
+		self.navigationItem.title = @"Set Color";
 	}
 	
 	return self;
@@ -108,10 +114,18 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	
 	nav.navigationBar.barStyle = UIBarStyleBlackOpaque;
 	
+    if (IS_IPAD()) {
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
 																						   target: self
 																						   action: @selector(done:)];
-	
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
+																						   target: self
+																						   action: @selector(cancel:)];
+
 	[controller presentViewController: nav animated: YES completion: nil];
 }
 
@@ -125,28 +139,42 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	
 	self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	
+    
+    _alphabarPicker.value = _alpha;
+    _alphabarPicker.fill=false;
+    
 	_barPicker.value = _hue;
+	_barPicker.fill = true;
 	_squareView.hue = _hue;
 	_squarePicker.hue = _hue;
 	_squarePicker.value = CGPointMake(_saturation, _brightness);
 	
-	if (_sourceColor)
+	if (_sourceColor) {
 		_sourceColorView.backgroundColor = _sourceColor;
 	
+        CGFloat r,g,b,a;
+        [_sourceColor getRed:&r green:&g blue:&b alpha:&a];
+        _alphabarPicker.value = a;
+        _alphabarView.color = _sourceColor;
+        _alpha = a;
+    
+        _txtValue.text = [_sourceColor hexStringValue];
+
+    }
 	if (_resultColor)
 		_resultColorView.backgroundColor = _resultColor;
 }
 
 //------------------------------------------------------------------------------
-
+/*
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation
 {
 	return UIInterfaceOrientationIsPortrait(interfaceOrientation);
 }
-
+*/
 //------------------------------------------------------------------------------
 
-- (NSUInteger) supportedInterfaceOrientations
+- (UIInterfaceOrientationMask) supportedInterfaceOrientations
 {
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		return UIInterfaceOrientationMaskAll;
@@ -164,6 +192,14 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 //------------------------------------------------------------------------------
 #pragma mark	IB actions
 //------------------------------------------------------------------------------
+
+- (IBAction)takeAlphaValue:(InfColorBarPicker *)sender {
+    
+    _alpha = sender.value;
+    
+    [ self updateResultColor ];
+    
+}
 
 - (IBAction) takeBarValue: (InfColorBarPicker*) sender
 {
@@ -199,6 +235,12 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	[self.delegate colorPickerControllerDidFinish: self];
 }
 
+- (IBAction) cancel: (id) sender
+{
+    self.resultColor = _sourceColor;
+	[self.delegate colorPickerControllerDidFinish: self];
+}
+
 //------------------------------------------------------------------------------
 #pragma mark	Properties
 //------------------------------------------------------------------------------
@@ -222,12 +264,16 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 	_resultColor = [UIColor colorWithHue: _hue
 							  saturation: _saturation
 							  brightness: _brightness
-								   alpha: 1.0f];
+								   alpha: _alpha];
 	
 	[self didChangeValueForKey: @"resultColor"];
 	
 	_resultColorView.backgroundColor = _resultColor;
 	
+    _txtValue.text = [_resultColor hexStringValue];
+    
+    _alphabarView.color = _resultColor;
+
 	[self informDelegateDidChangeColor];
 }
 
@@ -252,6 +298,12 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 			_squarePicker.hue = _hue;
 		}
 		
+        CGFloat r,g,b,a;
+        [newValue getRed:&r green:&g blue:&b alpha:&a];
+        _alphabarPicker.value = a;
+        _alphabarView.color = newValue;
+        _alpha = a;
+        
 		_squarePicker.value = CGPointMake(_saturation, _brightness);
 		
 		_resultColorView.backgroundColor = _resultColor;

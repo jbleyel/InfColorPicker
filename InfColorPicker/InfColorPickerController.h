@@ -28,7 +28,7 @@
 @property (nonatomic) UIColor* sourceColor;
 @property (nonatomic) UIColor* resultColor;
 
-@property (weak, nonatomic) id <InfColorPickerControllerDelegate> delegate;
+@property (strong, nonatomic) id <InfColorPickerControllerDelegate> delegate;
 
 @end
 

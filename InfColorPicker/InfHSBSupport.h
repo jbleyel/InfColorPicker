@@ -51,3 +51,5 @@ CGImageRef createHSVBarContentImage(InfComponentIndex barComponentIndex, float h
 	// remain at the constant value specified in the hsv array.
 
 //------------------------------------------------------------------------------
+
+CGImageRef createCheckerPatternImage(void);

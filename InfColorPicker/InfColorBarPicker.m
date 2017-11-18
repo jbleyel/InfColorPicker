@@ -28,6 +28,7 @@
 //==============================================================================
 
 @implementation InfColorBarView
+@synthesize color;
 
 //------------------------------------------------------------------------------
 
@@ -39,8 +40,64 @@ static CGImageRef createContentImage()
 
 //------------------------------------------------------------------------------
 
+static CGImageRef createContentImage2()
+{
+	return createCheckerPatternImage();
+}
+
+- (void) drawRectA: (CGRect) rect
+{
+	CGImageRef image = createContentImage2();
+    UIColor *patternColor = [UIColor colorWithPatternImage:[UIImage imageWithCGImage:image]];
+    
+    
+	if( image ) {
+		CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        [patternColor setFill];
+        
+        CGContextFillRect(context, self.bounds);
+        
+		CGImageRelease( image );
+        
+        CGFloat r,g,b,a;
+        [color getRed:&r green:&g blue:&b alpha:&a];
+        
+        CGGradientRef myGradient;
+        CGColorSpaceRef myColorspace = CGColorSpaceCreateDeviceRGB();
+        size_t num_locations = 2;
+        CGFloat locations[2] = { 0.0, 0.95 };
+        CGFloat components[8] = { r ,g ,b , 0.f,  // Start color
+            r,g,b, 1.f }; // End color
+        
+        myGradient = CGGradientCreateWithColorComponents (myColorspace, components,
+                                                          locations, num_locations);
+        
+        
+        CGPoint myStartPoint, myEndPoint;
+        myStartPoint.x = 0;
+        myStartPoint.y = 0;
+        myEndPoint.x = self.frame.size.width;
+        myEndPoint.y = 0;
+        
+        CGContextDrawLinearGradient(context, myGradient, myStartPoint
+                                    , myEndPoint,
+                                    kCGGradientDrawsAfterEndLocation);
+        
+        
+        CGColorSpaceRelease(myColorspace);
+        CGGradientRelease(myGradient);
+        
+	}
+}
+
 - (void) drawRect: (CGRect) rect
 {
+    if (self.color) {
+        [self drawRectA:rect];
+        return;
+    }
+    
 	CGImageRef image = createContentImage();
 	
 	if (image) {
@@ -50,6 +107,14 @@ static CGImageRef createContentImage()
 		
 		CGImageRelease(image);
 	}
+}
+
+- (void)setColor:(UIColor *)newColor
+{
+    color = newColor;
+    
+    [self setNeedsDisplay];
+    
 }
 
 //------------------------------------------------------------------------------
@@ -62,6 +127,7 @@ static CGImageRef createContentImage()
 	InfColorIndicatorView* indicator;
 }
 
+@synthesize fill;
 //------------------------------------------------------------------------------
 #pragma mark	Drawing
 //------------------------------------------------------------------------------
@@ -71,6 +137,8 @@ static CGImageRef createContentImage()
 	if (indicator == nil) {
 		CGFloat kIndicatorSize = 24.0f;
 		indicator = [[InfColorIndicatorView alloc] initWithFrame: CGRectMake(0, 0, kIndicatorSize, kIndicatorSize)];
+        
+        indicator.fill = fill;
 		[self addSubview: indicator];
 	}
 	
