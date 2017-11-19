@@ -22,7 +22,6 @@
 //==============================================================================
 
 @implementation InfColorBarView
-@synthesize color;
 
 //------------------------------------------------------------------------------
 
@@ -55,7 +54,7 @@ static CGImageRef createContentImage2()
 		CGImageRelease( image );
         
         CGFloat r,g,b,a;
-        [color getRed:&r green:&g blue:&b alpha:&a];
+        [_color getRed:&r green:&g blue:&b alpha:&a];
         
         CGGradientRef myGradient;
         CGColorSpaceRef myColorspace = CGColorSpaceCreateDeviceRGB();
@@ -87,7 +86,7 @@ static CGImageRef createContentImage2()
 
 - (void) drawRect: (CGRect) rect
 {
-    if (self.color) {
+    if (_color) {
         [self drawRectA:rect];
         return;
     }
@@ -96,17 +95,14 @@ static CGImageRef createContentImage2()
 	
 	if (image) {
 		CGContextRef context = UIGraphicsGetCurrentContext();
-		
 		CGContextDrawImage(context, [self bounds], image);
-		
 		CGImageRelease(image);
 	}
 }
 
 - (void)setColor:(UIColor *)newColor
 {
-    color = newColor;
-    
+    _color = newColor;
     [self setNeedsDisplay];
     
 }
@@ -121,7 +117,6 @@ static CGImageRef createContentImage2()
 	InfColorIndicatorView* indicator;
 }
 
-@synthesize fill;
 //------------------------------------------------------------------------------
 #pragma mark	Drawing
 //------------------------------------------------------------------------------
@@ -131,8 +126,7 @@ static CGImageRef createContentImage2()
 	if (indicator == nil) {
 		CGFloat kIndicatorSize = 24.0f;
 		indicator = [[InfColorIndicatorView alloc] initWithFrame: CGRectMake(0, 0, kIndicatorSize, kIndicatorSize)];
-        
-        indicator.fill = fill;
+        indicator.fill = _fill;
 		[self addSubview: indicator];
 	}
 	

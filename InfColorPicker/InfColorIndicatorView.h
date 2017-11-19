@@ -15,7 +15,6 @@
 //------------------------------------------------------------------------------
 
 @interface InfColorIndicatorView : UIView
-
 @property (nonatomic) UIColor* color;
 @property( nonatomic ) BOOL fill;
 @end

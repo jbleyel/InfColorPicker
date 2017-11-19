@@ -245,9 +245,9 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 
 - (IBAction) cancel: (id) sender
 {
-    self.resultColor = _sourceColor;
+    _resultColor = _sourceColor;
     if (_resultBlock) {
-        _resultBlock(self, false, self.resultColor);
+        _resultBlock(self, false, _resultColor);
     }
     if (self.delegate && [(id) self.delegate respondsToSelector: @selector(colorPickerControllerDidFinish:)])
         [self.delegate colorPickerControllerDidFinish: self];

@@ -15,7 +15,6 @@
 //==============================================================================
 
 @implementation InfColorIndicatorView
-@synthesize fill;
 //------------------------------------------------------------------------------
 
 - (id) initWithFrame: (CGRect) frame
@@ -25,7 +24,7 @@
 	if (self) {
 		self.opaque = NO;
 		self.userInteractionEnabled = NO;
-        fill = YES;
+        _fill = YES;
 	}
 	
 	return self;
@@ -52,9 +51,10 @@
 	CGFloat radius = CGRectGetMidX(self.bounds);
 	
 	// Fill it:
-	if (fill) {
+	if (_fill)
+    {
         CGContextAddArc(context, center.x, center.y, radius - 1.0f, 0.0f, 2.0f * (float) M_PI, YES);
-        [self.color setFill];
+        [_color setFill];
         CGContextFillPath(context);
 	}
 	// Stroke it (black transucent, inner):
