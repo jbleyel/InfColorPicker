@@ -16,7 +16,7 @@
 
 typedef void (^InfColorPickerControllerCompletionBlock) (InfColorPickerController* _Nonnull ctrl ,BOOL Success, UIColor * _Nullable color);
 
-//@protocol InfColorPickerControllerDelegate;
+@protocol InfColorPickerControllerDelegate;
 
 //------------------------------------------------------------------------------
 
@@ -29,27 +29,26 @@ typedef void (^InfColorPickerControllerCompletionBlock) (InfColorPickerControlle
 
 - (void) presentModallyOverViewController: (UIViewController*_Nullable) controller;
 
-//@property (strong, nonatomic) id <InfColorPickerControllerDelegate> delegate;
+@property (strong, nonatomic,nullable) id <InfColorPickerControllerDelegate> delegate;
+@property (nonatomic,nullable) InfColorPickerControllerCompletionBlock resultBlock;
 
-@property (nonatomic) InfColorPickerControllerCompletionBlock _Nonnull resultBlock;
-
-@property (nonatomic) UIColor* _Nullable sourceColor;
-@property (nonatomic) UIColor* _Nullable resultColor;
+@property (nonatomic,nullable) UIColor*  sourceColor;
+@property (nonatomic,nullable) UIColor*  resultColor;
 
 
 @end
 
 //------------------------------------------------------------------------------
-/*
+
 @protocol InfColorPickerControllerDelegate
 
 @optional
 
-- (void) colorPickerControllerDidFinish: (InfColorPickerController*) controller;
-	// This is only called when the color picker is presented modally.
+- (void) colorPickerControllerDidFinish: (InfColorPickerController* _Nonnull) controller;
+// This is only called when the color picker is presented modally.
 
-- (void) colorPickerControllerDidChangeColor: (InfColorPickerController*) controller;
+- (void) colorPickerControllerDidChangeColor: (InfColorPickerController* _Nonnull) controller;
 
 @end
-*/
+
 //------------------------------------------------------------------------------

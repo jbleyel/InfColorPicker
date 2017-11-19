@@ -239,7 +239,8 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
     if (_resultBlock) {
         _resultBlock(self, true, self.resultColor);
     }
-//	[self.delegate colorPickerControllerDidFinish: self];
+    if (self.delegate && [(id) self.delegate respondsToSelector: @selector(colorPickerControllerDidFinish:)])
+        [self.delegate colorPickerControllerDidFinish: self];
 }
 
 - (IBAction) cancel: (id) sender
@@ -248,7 +249,8 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
     if (_resultBlock) {
         _resultBlock(self, false, self.resultColor);
     }
-//	[self.delegate colorPickerControllerDidFinish: self];
+    if (self.delegate && [(id) self.delegate respondsToSelector: @selector(colorPickerControllerDidFinish:)])
+        [self.delegate colorPickerControllerDidFinish: self];
 }
 
 //------------------------------------------------------------------------------
@@ -257,8 +259,8 @@ static void HSVFromUIColor(UIColor* color, float* h, float* s, float* v)
 
 - (void) informDelegateDidChangeColor
 {
-	//if (self.delegate && [(id) self.delegate respondsToSelector: @selector(colorPickerControllerDidChangeColor:)])
-	//	[self.delegate colorPickerControllerDidChangeColor: self];
+	if (self.delegate && [(id) self.delegate respondsToSelector: @selector(colorPickerControllerDidChangeColor:)])
+		[self.delegate colorPickerControllerDidChangeColor: self];
 }
 
 //------------------------------------------------------------------------------
